@@ -17,6 +17,152 @@ import ThemeProvider from '@mui/material/styles/ThemeProvider';
 import createTheme from '@mui/material/styles/createTheme';
 import themeOptions from './themeOptions';
 
+const multilanguagePrompts = [
+    // German
+    {
+        title: 'English & German',
+        content: `Examples:
+What is the meaning of "Hallo. Wie geht es dir?".
+Conjugate the verb "gehen".
+Transcript: `,
+    },
+
+    // Spanish
+    {
+        title: 'English & Spanish',
+        content: `Examples:
+What is the meaning of "Hola. ¿Cómo estás?".
+Conjugate the verb "comer".
+Transcript: `,
+    },
+
+    // French
+    {
+        title: 'English & French',
+        content: `Examples:
+What is the meaning of "Bonjour. Comment vas-tu?".
+Conjugate the verb "manger".
+Transcript: `,
+    },
+
+    // Hindi
+    {
+        title: 'English & Hindi',
+        content: `Examples:
+What is the meaning of "नमस्ते। आप कैसे हैं?".
+Conjugate the verb "खाना".
+Transcript: `,
+    },
+
+    // Indonesian
+    {
+        title: 'English & Indonesian',
+        content: `Examples:
+What is the meaning of "Halo. Bagaimana kabarmu?".
+Conjugate the verb "makan".
+Transcript: `,
+    },
+
+    // Italian
+    {
+        title: 'English & Italian',
+        content: `Examples:
+What is the meaning of "Ciao. Come stai?".
+Conjugate the verb "mangiare".
+Transcript: `,
+    },
+
+    // Japanese
+    {
+        title: 'English & Japanese',
+        content: `Examples:
+What is the meaning of "こんにちは。お元気ですか？".
+Conjugate the verb "食べる".
+Transcript: `,
+    },
+
+    // Korean
+    {
+        title: 'English & Korean',
+        content: `Examples:
+What is the meaning of "안녕하세요. 어떻게 지내세요?".
+Conjugate the verb "먹다".
+Transcript: `,
+    },
+
+    // Dutch (Netherlands)
+    {
+        title: 'English & Dutch',
+        content: `Examples:
+What is the meaning of "Hallo. Hoe gaat het met je?".
+Conjugate the verb "eten".
+Transcript: `,
+    },
+
+    // Polish (Polski)
+    {
+        title: 'English & Polish',
+        content: `Examples:
+What is the meaning of "Cześć. Jak się masz?".
+Conjugate the verb "jeść".
+Transcript: `,
+    },
+
+    // Portuguese
+    {
+        title: 'English & Portuguese',
+        content: `Examples:
+What is the meaning of "Olá. Como você está?".
+Conjugate the verb "comer".
+Transcript: `,
+    },
+
+    // Russian
+    {
+        title: 'English & Russian',
+        content: `Examples:
+What is the meaning of "Привет. Как дела?".
+Conjugate the verb "есть".
+Transcript: `,
+    },
+
+    // Chinese (Simplified)
+    {
+        title: 'English & Chinese',
+        content: `Examples:
+What is the meaning of "你好。你怎么样？".
+Conjugate the verb "吃".
+Transcript: `,
+    },
+
+    // Taiwanese Mandarin
+    {
+        title: 'English & Taiwanese Mandarin',
+        content: `Examples:
+What is the meaning of "你好。你好嗎？".
+Conjugate the verb "吃".
+Transcript: `,
+    },
+
+    // Cantonese
+    {
+        title: 'English & Cantonese',
+        content: `Examples:
+What is the meaning of "你好。你點樣？".
+Conjugate the verb "食".
+Transcript: `,
+    },
+
+    // Vietnamese
+    {
+        title: 'English & Vietnamese',
+        content: `Examples:
+What is the meaning of "Xin chào. Bạn khỏe không?".
+Conjugate the verb "ăn".
+Transcript: `,
+    },
+];
+
 const darkTheme = createTheme(themeOptions);
 
 function App() {
@@ -108,10 +254,10 @@ function App() {
                         setPromptContent(result.openai_prompts[result.openai_selected_prompt]?.content || '');
                     }
 
-                    // shortcuts config on first launch 
+                    // shortcuts config on first launch
                     if (!result.config_shortcut_first_key && !result.config_shortcut_first_modifier && !result.config_shortcut_second_modifier) {
                         // we set default for windows and mac separately
-                        if ((navigator.userAgentData.platform).toLowerCase().indexOf('mac') > -1) {
+                        if (navigator.userAgentData.platform.toLowerCase().indexOf('mac') > -1) {
                             setShortcutFirstModifier('ctrlKey');
                             setShortcutFirstKey('r');
                             await chrome.storage?.sync.set(
@@ -123,8 +269,7 @@ function App() {
                                     // console.log('Config stored');
                                 }
                             );
-
-                        } else if ((navigator.userAgentData.platform).toLowerCase().indexOf('win') > -1) {
+                        } else if (navigator.userAgentData.platform.toLowerCase().indexOf('win') > -1) {
                             setShortcutFirstModifier('shiftKey');
                             setShortcutSecondModifier('altKey');
                             setShortcutFirstKey('r');
@@ -419,7 +564,10 @@ function App() {
                         </Typography>
                     </Box>
                     <Box width="100%">
-                        <FormControlLabel control={<Switch checked={shortcutEnabled} onChange={handleToggleShortcut} />} label="Enable Microphone Toggle Shortcut" />
+                        <FormControlLabel
+                            control={<Switch checked={shortcutEnabled} onChange={handleToggleShortcut} />}
+                            label="Enable Microphone Toggle Shortcut"
+                        />
                         <FormHelperText>Requires page refresh on an any change.</FormHelperText>
                     </Box>
                     {shortcutEnabled && (
