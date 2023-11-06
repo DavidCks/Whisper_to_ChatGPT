@@ -213,7 +213,7 @@ function App() {
                     // backwards compatibility with old version (only one prompt)
                     // first launch of new version
                     if (result.openai_prompt && !result.openai_prompts && !result.openai_selected_prompt) {
-                        setPrompts([{ title: 'Initial prompt', content: result.openai_prompt }]);
+                        setPrompts([{ title: 'Initial prompt', content: result.openai_prompt }, ...multilanguagePrompts]);
                         setSelectedPrompt(0);
                         setPromptTitle('Initial prompt');
                         setPromptContent(result.openai_prompt);
@@ -231,7 +231,7 @@ function App() {
                     // first launch ever
                     if (!result.openai_prompt && !result.openai_prompts && !result.openai_selected_prompt) {
                         const initialPrompt = `The transcript is about OpenAI which makes technology like DALL·E, GPT-3, and ChatGPT with the hope of one day building an AGI system that benefits all of humanity.`;
-                        setPrompts([{ title: 'Initial prompt', content: initialPrompt }]);
+                        setPrompts([{ title: 'Initial prompt', content: initialPrompt }, ...multilanguagePrompts]);
                         setSelectedPrompt(0);
                         setPromptTitle('Initial prompt');
                         setPromptContent(initialPrompt);
