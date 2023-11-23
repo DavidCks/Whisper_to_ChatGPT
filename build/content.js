@@ -63,7 +63,8 @@ class AudioRecorder {
         }
     }
 
-    createMicButton(inputType) { // 'main' : 'secondary'
+    createMicButton(inputType) {
+        // 'main' : 'secondary'
         this.micButton = document.createElement('button');
         this.micButton.className = `microphone_button ${MICROPHONE_BUTTON_CLASSES}`;
         this.micButton.style.marginRight = inputType === 'main' ? '2.2rem' : '26.5rem';
@@ -217,7 +218,6 @@ class AudioRecorder {
                 this.setButtonState('loading');
                 // console.log('recording stop');
                 const audioBlob = new Blob(chunks, { type: 'audio/webm' });
-
                 const file = audioBlob;
 
                 if (await this.downloadEnabled()) {
